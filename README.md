@@ -4,7 +4,7 @@
 
 Add this line to your application's Gemfile:
 
-    gem 'omniauth-picowork', :git => 'git://github.com/elvisshih/omniauth-picowork.git'
+    gem 'omniauth_picowork', :git => 'git://github.com/elvisshih/omniauth-picowork.git'
 
 And then execute:
 
@@ -22,5 +22,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 end
 ```
 
-You can now access the OmniAuth Picowork OAuth2 URL: `/auth/picowork-dev`.
+You can now access the OmniAuth Picowork OAuth2 URL: `/auth/picowork_dev`.
 
