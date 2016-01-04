@@ -3,9 +3,9 @@ require 'omniauth-oauth2'
 
 module OmniAuth
   module Strategies
-    class PicoworkSupportLocal < OmniAuth::Strategies::OAuth2
+    class Support < OmniAuth::Strategies::OAuth2
       # Give your strategy a name.
-      option :name, "picowork_support_local"
+      option :name, "support"
 
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.
