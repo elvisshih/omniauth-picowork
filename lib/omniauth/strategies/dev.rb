@@ -3,16 +3,16 @@ require 'omniauth-oauth2'
 
 module OmniAuth
   module Strategies
-    class Support < OmniAuth::Strategies::OAuth2
+    class Dev < OmniAuth::Strategies::OAuth2
       # Give your strategy a name.
-      option :name, "support"
+      option :name, "dev"
 
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.
       option :client_options, {
-        :site => "https://support.picowork.com",
-        :authorize_url => "/uAuth/oauth2/authorize",
-        :token_url => "https://support.picowork.com/uAuth/oauth2/token"
+        :site => "https://dev.picowork.com",
+        :authorize_url => "https://dev.picowork.com/uAuth/oauth2/authorize",
+        :token_url => "https://dev.picowork.com/uAuth/oauth2/token"
       }
 
       # These are called after authentication has succeeded. If
@@ -58,4 +58,4 @@ module OmniAuth
   end
 end
 
-OmniAuth.config.add_camelization 'support', 'Support'
+OmniAuth.config.add_camelization 'dev', 'Dev'

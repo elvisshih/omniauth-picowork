@@ -14,9 +14,6 @@ module OmniAuth
         :token_url => "https://developer.picowork.com/uAuth/oauth2/token"
       }
 
-      #option :scope, 'r_basicprofile r_emailaddress'
-      # option :fields, ['user_id', 'email']
-
       # These are called after authentication has succeeded. If
       # possible, you should try to set the UID without making
       # additional calls (if the user id is returned with the token
@@ -33,7 +30,10 @@ module OmniAuth
       end
 
       extra do
-        { 'raw_info' => raw_info }
+        { 
+          :raw_info => raw_info, 
+          :access_token => access_token.token 
+        }
       end
 
       def build_access_token
@@ -41,31 +41,20 @@ module OmniAuth
         client.auth_code.get_token(verifier, {:redirect_uri => options.redirect_uri}.merge(token_params.to_hash(:symbolize_keys => true)), deep_symbolize(options.auth_token_params))
       end
 
-      def raw_info
-        path = options.client_options.site + '/uHutt/account/info'
-        uri = URI(path)
-        res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') do |http|
-          req = Net::HTTP::Get.new(uri.path)
-          req.add_field 'authorization', access_token.token
-          http.request req
-        end
-        @raw_info ||= MultiJson.decode(res.body)['result']
+      alias :oauth2_access_token :access_token
+
+      def access_token
+        ::OAuth2::AccessToken.new(client, oauth2_access_token.token, {
+          :mode => :header,
+          :header_format => "%s"
+        })
       end
 
-    #   private
-
-    #   def option_fields
-    #     fields = options.fields
-    #     fields.map! { |f| f == "picture-url" ? "picture-url;secure=true" : f } if !!options[:secure_image_url]
-    #     fields
-    #   end
-
-    #   def user_name
-    #     name = "#{raw_info['firstName']} #{raw_info['lastName']}".strip
-    #     name.empty? ? nil : name
-    #   end
+      def raw_info
+        @raw_info ||= access_token.get("/uHutt/account/info").parsed["result"]
+      end
     end
   end
 end
 
-# OmniAuth.config.add_camelization 'picowork_local', 'PicoworkLocal'
+OmniAuth.config.add_camelization 'developer', 'Developer'
