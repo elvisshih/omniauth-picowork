@@ -2,9 +2,9 @@ require 'json'
 require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
-    class Ctrip < OmniAuth::Strategies::OAuth2
+    class CnAlpha < OmniAuth::Strategies::OAuth2
       # Give your strategy a name.
-      option :name, "ctrip"
+      option :name, "cn_alpha"
 
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.
@@ -57,4 +57,4 @@ module OmniAuth
   end
 end
 
-OmniAuth.config.add_camelization 'ctrip', 'Ctrip'
+OmniAuth.config.add_camelization 'cnalpha', 'CnAlpha'
