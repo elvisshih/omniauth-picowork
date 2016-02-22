@@ -10,7 +10,7 @@ module OmniAuth
       # initializing your consumer from the OAuth gem.
       option :client_options, {
         :site => "https://cs.ihandy.cn",
-        :authorize_url => "https://cs.ihandy.cn/uAuth/oauth2/authorize",
+        :authorize_url => "/uAuth/oauth2/authorize",
         :token_url => "https://cs.ihandy.cn/uAuth/oauth2/token"
       }
 
