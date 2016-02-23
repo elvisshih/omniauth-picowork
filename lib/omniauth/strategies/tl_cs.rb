@@ -2,9 +2,9 @@ require 'json'
 require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
-    class TlCtrip < OmniAuth::Strategies::OAuth2
+    class TlCs < OmniAuth::Strategies::OAuth2
       # Give your strategy a name.
-      option :name, "tl_ctrip"
+      option :name, "tl_cs"
 
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.
@@ -57,4 +57,4 @@ module OmniAuth
   end
 end
 
-OmniAuth.config.add_camelization 'tlctrip', 'TlCtrip'
+OmniAuth.config.add_camelization 'tlcs', 'TlCs'
